@@ -16,11 +16,21 @@ public class CustomerService {
 ////        return (Customer) customerRepository.findById(customerId).orElse(null);
 //        return  new Customer(1L,"张三");
 //    }
-    @Caching(cacheable = {
-                    @Cacheable(cacheNames = "customerCache", cacheManager = "caffeineCacheManager"),
-                    @Cacheable(cacheNames = "customerCache", cacheManager = "redisCacheManager"),
-            })
-    public Customer getCustomer(Long customerId) throws InterruptedException {
+//    @Caching(cacheable = {
+//                    @Cacheable(cacheNames = "customerCache", cacheManager = "caffeineCacheManager"),
+//                    @Cacheable(cacheNames = "customerCache", cacheManager = "redisCacheManager"),
+//            })
+//    public Customer getCustomer(Long customerId) throws InterruptedException {
+//        sleep(500);
+//        System.out.println("get from database");
+//        return  new Customer(customerId,"张三");
+//    }
+//    @Caching(cacheable = {
+//            @Cacheable(cacheNames = "customerCache", cacheManager = "caffeineCacheManager"),
+//            @Cacheable(cacheNames = "customerCache", cacheManager = "redisCacheManager"),
+//    })
+    @Cacheable(value={"test111#30#3"} /*key="#key" + ".#defaultValue",**cacheNames = "customerCache"*/, cacheManager = "customizedRedisCacheManager")
+    public Customer getCustomer3(Long customerId) throws InterruptedException {
         sleep(500);
         System.out.println("get from database");
         return  new Customer(customerId,"张三");
